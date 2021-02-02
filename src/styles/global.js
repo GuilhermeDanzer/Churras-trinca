@@ -4,7 +4,7 @@ export default createGlobalStyle`
 body {
   background-color: ${(props) => props.theme.colors.background};
   margin: 0;
-  font-family: ${(props) => props.theme.font.fontFamily}
+  font-family: ${(props) => props.theme.font.fontFamily};
   color:${(props) => props.theme.colors.text};
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -14,6 +14,11 @@ body {
 
 }
 
+a{
+  color:${(props) => props.theme.colors.text};
+  text-decoration:none;
+  display:contents;
+}
 
 code {
   font-family: Raleway;

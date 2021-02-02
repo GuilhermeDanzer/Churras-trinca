@@ -1,13 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import styled from "styled-components";
 import backgroundBarbecue from "../assets/backgroundBarbecue.svg";
-const Login = () => {
+export const Login = () => {
   return (
     <Container>
       <Box backgroundImage={backgroundBarbecue}>
-        <Titulo>Agenda de Churras</Titulo>
+        <Titulo left="169px" top="47px">
+          Agenda de Churras
+        </Titulo>
         <EmailContainer>
           <LabelEmail>Login</LabelEmail>
           <Input
@@ -29,27 +32,29 @@ const Login = () => {
           }}
           placeholder="senha"
         />
-        <Button
-          style={{
-            position: "absolute",
-            left: 177,
-            top: 513,
-          }}
-        >
-          <ButtonText>Entrar</ButtonText>
-        </Button>
+        <Link to="/agenda">
+          <Button
+            style={{
+              position: "absolute",
+              left: 177,
+              top: 513,
+            }}
+          >
+            <ButtonText>Entrar</ButtonText>
+          </Button>
+        </Link>
       </Box>
     </Container>
   );
 };
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const Box = styled.div`
+export const Box = styled.div`
   position: absolute;
   width: 636px;
   height: 746px;
@@ -66,13 +71,11 @@ const Box = styled.div`
   align-items: center;
 `;
 
-const Titulo = styled.h1`
+export const Titulo = styled.h1`
   position:absolute;
-  left:169px;
-  top:47px;
+  left:${(props) => props.left};
+  top:${(props) => props.top};
   line height:2.348rem;
-
-  
   `;
 
 const EmailContainer = styled.div`
@@ -115,4 +118,3 @@ const ButtonText = styled.span`
   line-height: 21px;
   font-family: ${(props) => props.theme.font.fontFamily};
 `;
-export default Login;

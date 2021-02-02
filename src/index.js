@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import Login from "./screens/Login";
+import { Login } from "./screens/Login";
+import { ScheduleScreen } from "./screens/ScheduleScreen";
+import { BarbecueScreen } from "./screens/BarbecueScreen";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import GlobalStyle from "./styles/global";
@@ -10,12 +12,14 @@ import theme from "./styles/theme";
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
       <Router>
         <Switch>
           <Route exact={true} path="/" component={Login} />
+          <Route path="/agenda" component={ScheduleScreen} />
+          <Route path="/cadastrar" component={BarbecueScreen} />
         </Switch>
       </Router>
+      <GlobalStyle />
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
