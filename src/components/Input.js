@@ -12,6 +12,7 @@ const InputField = styled.input`
   font-style: italic;
   border: none;
   outline: none;
+  -webkit-appearance: none;
 `;
 export const Input = (props) => {
   return <InputField {...props} />;

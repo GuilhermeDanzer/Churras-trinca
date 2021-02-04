@@ -34,8 +34,8 @@ export const Wrapper = ({ children }) => {
             Agenda de Churras
           </Titulo>
         </Header>
+        {children}
       </Box>
-      {children}
     </Container>
   );
 };

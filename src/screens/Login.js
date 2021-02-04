@@ -31,6 +31,7 @@ export const Login = () => {
             top: 389,
           }}
           placeholder="senha"
+          type="password"
         />
         <Link to="/agenda">
           <Button

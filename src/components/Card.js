@@ -4,6 +4,7 @@ import MoneyIcon from "../assets/MoneyIcon";
 import PeopleIcon from "../assets/PeopleIcon";
 import BarbecueIcon from "../assets/BarbecueIcon";
 import { Link } from "react-router-dom";
+import Moment from "moment";
 const CardBody = styled.div`
   position: relative;
   width: 282px;
@@ -76,14 +77,16 @@ const PessoaIcone = styled.div`
 `;
 
 export const Card = (props) => {
+  const dados = props.info;
+  console.log(dados);
   return (
     <CardBody branco={props.branco}>
       {props.churrasco ? (
         <>
-          <Data>21/10</Data>
-          <NomeChurrasco>Churras do gui</NomeChurrasco>
+          <Data>{Moment(dados.data).format("DD/MM")}</Data>
+          <NomeChurrasco>{dados.nome}</NomeChurrasco>
           <PessoaIcone>
-            <PeopleIcon>a</PeopleIcon>
+            <PeopleIcon />
           </PessoaIcone>
           <Pessoas>12</Pessoas>
           <MoneyIcone>

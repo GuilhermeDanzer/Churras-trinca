@@ -9,18 +9,21 @@ import reportWebVitals from "./reportWebVitals";
 import GlobalStyle from "./styles/global";
 import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
+import { Provider as ChurrasProvider } from "./context/ChurrasContext";
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Router>
-        <Switch>
-          <Route exact={true} path="/" component={Login} />
-          <Route path="/agenda" component={ScheduleScreen} />
-          <Route path="/cadastrar" component={BarbecueScreen} />
-        </Switch>
-      </Router>
-      <GlobalStyle />
-    </ThemeProvider>
+    <ChurrasProvider>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Switch>
+            <Route exact={true} path="/" component={Login} />
+            <Route path="/agenda" component={ScheduleScreen} />
+            <Route path="/cadastrar" component={BarbecueScreen} />
+          </Switch>
+        </Router>
+        <GlobalStyle />
+      </ThemeProvider>
+    </ChurrasProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
