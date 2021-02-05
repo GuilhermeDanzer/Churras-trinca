@@ -4,6 +4,7 @@ import "./index.css";
 import { Login } from "./screens/Login";
 import { ScheduleScreen } from "./screens/ScheduleScreen";
 import { BarbecueScreen } from "./screens/BarbecueScreen";
+import { ListScreen } from "./screens/ListScreen";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import GlobalStyle from "./styles/global";
@@ -19,6 +20,7 @@ ReactDOM.render(
             <Route exact={true} path="/" component={Login} />
             <Route path="/agenda" component={ScheduleScreen} />
             <Route path="/cadastrar" component={BarbecueScreen} />
+            <Route path="/info" component={ListScreen} />
           </Switch>
         </Router>
         <GlobalStyle />

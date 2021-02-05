@@ -78,7 +78,7 @@ const PessoaIcone = styled.div`
 
 export const Card = (props) => {
   const dados = props.info;
-  console.log(dados);
+
   return (
     <CardBody branco={props.branco}>
       {props.churrasco ? (
@@ -88,11 +88,17 @@ export const Card = (props) => {
           <PessoaIcone>
             <PeopleIcon />
           </PessoaIcone>
-          <Pessoas>12</Pessoas>
+          <Pessoas>{dados.listaConvidado.length}</Pessoas>
           <MoneyIcone>
             <MoneyIcon />
           </MoneyIcone>
-          <Dinheiro>R$ 280</Dinheiro>
+          <Dinheiro>
+            R$
+            {dados.listaConvidado.reduce(
+              (total, currentValue) => (total = total + currentValue.preco),
+              0
+            )}
+          </Dinheiro>
         </>
       ) : (
         <>

@@ -1,10 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import styled from "styled-components";
 import backgroundBarbecue from "../assets/backgroundBarbecue.svg";
+import { Context as BarbecueContext } from "../context/ChurrasContext";
+
 export const Login = () => {
+  const history = useHistory();
+  const { state, signIn } = useContext(BarbecueContext);
+  const [values, setValues] = useState({ email: "", senha: "" });
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  if (state.usuario) {
+    history.push("/agenda");
+  } else {
+    console.log(null);
+  }
+
   return (
     <Container>
       <Box backgroundImage={backgroundBarbecue}>
@@ -14,6 +29,8 @@ export const Login = () => {
         <EmailContainer>
           <LabelEmail>Login</LabelEmail>
           <Input
+            value={values.email}
+            onChange={handleChange("email")}
             style={{
               position: "absolute",
               left: 177,
@@ -25,6 +42,13 @@ export const Login = () => {
 
         <LabelSenha>Senha</LabelSenha>
         <Input
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              signIn(values);
+            }
+          }}
+          value={values.senha}
+          onChange={handleChange("senha")}
           style={{
             position: "absolute",
             left: 177,
@@ -33,17 +57,17 @@ export const Login = () => {
           placeholder="senha"
           type="password"
         />
-        <Link to="/agenda">
-          <Button
-            style={{
-              position: "absolute",
-              left: 177,
-              top: 513,
-            }}
-          >
-            <ButtonText>Entrar</ButtonText>
-          </Button>
-        </Link>
+
+        <Button
+          onClick={() => signIn(values)}
+          style={{
+            position: "absolute",
+            left: 177,
+            top: 513,
+          }}
+        >
+          <ButtonText>Entrar</ButtonText>
+        </Button>
       </Box>
     </Container>
   );
@@ -112,7 +136,7 @@ const LabelSenha = styled.p`
   color: ${(props) => props.theme.colors.text};
 `;
 
-const ButtonText = styled.span`
+export const ButtonText = styled.span`
   font-style: normal;
   font-weight: bold;
   font-size: 18px;

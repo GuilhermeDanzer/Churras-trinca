@@ -3,8 +3,10 @@ import jsonServer from "../api/jsonServer";
 
 const churrasReducer = (state, action) => {
   switch (action.type) {
+    case "sign_in":
+      return { ...state, usuario: action.payload };
     case "get_churras":
-      return action.payload;
+      return { ...state, churras: action.payload };
 
     case "edit_blogpost":
       return state.map((blogPost) => {
@@ -19,19 +21,22 @@ const churrasReducer = (state, action) => {
 };
 
 const signIn = (dispatch) => {
-  return async (email, password, callback) => {
+  return async (valores, callback) => {
+    const { email, senha } = valores;
     const response = await jsonServer.get("users");
-    const verificacao = response.data.forEach((element) => {
-      if (element.email === email && element.password === password) {
-        return true;
+    console.log(response.data);
+    let verificacao = false;
+    response.data.forEach((element) => {
+      if (element.email === email && element.senha === senha) {
+        verificacao = true;
       }
     });
+
+    console.log(verificacao);
     if (verificacao) {
-      dispatch({ type: "sign_in", payload: "Usuário verificado" });
-      if (callback) {
-        callback();
-      }
+      dispatch({ type: "sign_in", payload: verificacao });
     } else {
+      dispatch({ type: "sign_in", payload: verificacao });
       alert("Usuário não existente");
     }
   };
@@ -45,14 +50,24 @@ const getChurras = (dispatch) => {
 };
 const addChurras = (dispatch) => {
   return async (churras, callback) => {
-    const { nome, data, desc, precoChurras, precoBebida, obs } = churras;
+    const {
+      nome,
+      data,
+      desc,
+      churrasPreco,
+      bebidaPreco,
+      obs,
+      listaConvidado,
+    } = churras;
+
     await jsonServer.post("/churrascos", {
       nome,
       data,
       desc,
-      precoChurras,
-      precoBebida,
+      churrasPreco,
+      bebidaPreco,
       obs,
+      listaConvidado,
     });
     alert("Cadastro realizado com sucesso");
     if (callback) {
@@ -64,5 +79,5 @@ const addChurras = (dispatch) => {
 export const { Context, Provider } = createDataContext(
   churrasReducer,
   { addChurras, getChurras, signIn },
-  []
+  { churras: [] }
 );

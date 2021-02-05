@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Card } from "../components/Card";
 import { Wrapper } from "../components/Wrapper";
-import backgroundBarbecue from "../assets/backgroundBarbecue.svg";
 import { Context as ChurrasContext } from "../context/ChurrasContext";
 
 const Dashboard = styled.div`
@@ -22,15 +22,24 @@ export const ScheduleScreen = () => {
   useEffect(() => {
     getChurras();
   }, []);
-  console.log(state);
+
+  const churrascos = state.churras;
   return (
     <Wrapper>
       <Dashboard>
-        {state.map((element) => {
+        {churrascos.map((element) => {
           return (
-            <CardDiv key={element.id}>
-              <Card info={element} branco={true} churrasco={true} />
-            </CardDiv>
+            <Link
+              key={element.id}
+              to={{
+                pathname: "/info",
+                state: { info: element },
+              }}
+            >
+              <CardDiv>
+                <Card info={element} branco={true} churrasco={true} />
+              </CardDiv>
+            </Link>
           );
         })}
         <CardDiv>
