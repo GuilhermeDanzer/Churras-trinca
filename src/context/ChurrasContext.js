@@ -1,6 +1,5 @@
 import createDataContext from "./createDataContext";
 import jsonServer from "../api/jsonServer";
-
 const churrasReducer = (state, action) => {
   switch (action.type) {
     case "sign_in":

@@ -9,7 +9,7 @@ export const ScheduleScreen = () => {
   const { state, getChurras } = useContext(ChurrasContext);
   useEffect(() => {
     getChurras();
-  }, [getChurras, state]);
+  }, []);
 
   const churrascos = state.churras;
   return (
