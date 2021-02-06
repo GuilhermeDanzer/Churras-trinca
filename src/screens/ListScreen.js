@@ -6,17 +6,7 @@ import styled from "styled-components";
 export const ListScreen = () => {
   const history = useHistory();
   const dados = history.location.state;
-  console.log(dados.info);
-  const Dashboard = styled.div`
-    display: flex;
 
-    justify-content: center;
-  `;
-  const ListDiv = styled.div`
-    margin-bottom: 67px;
-    margin-top: -32px;
-    border-radius: 2px;
-  `;
   return (
     <Wrapper>
       <Dashboard>
@@ -27,3 +17,13 @@ export const ListScreen = () => {
     </Wrapper>
   );
 };
+const Dashboard = styled.div`
+  display: flex;
+
+  justify-content: center;
+`;
+const ListDiv = styled.div`
+  margin-bottom: 67px;
+  margin-top: -32px;
+  border-radius: 2px;
+`;

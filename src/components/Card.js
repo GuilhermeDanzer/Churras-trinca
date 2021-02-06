@@ -94,10 +94,7 @@ export const Card = (props) => {
           </MoneyIcone>
           <Dinheiro>
             R$
-            {dados.listaConvidado.reduce(
-              (total, currentValue) => (total = total + currentValue.preco),
-              0
-            )}
+            {dados.total}
           </Dinheiro>
         </>
       ) : (

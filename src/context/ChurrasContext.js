@@ -8,20 +8,13 @@ const churrasReducer = (state, action) => {
     case "get_churras":
       return { ...state, churras: action.payload };
 
-    case "edit_blogpost":
-      return state.map((blogPost) => {
-        return blogPost.id === action.payload.id ? action.payload : blogPost;
-      });
-
-    case "delete_blogpost":
-      return state.filter((blogPost) => blogPost.id !== action.payload);
     default:
       return state;
   }
 };
 
 const signIn = (dispatch) => {
-  return async (valores, callback) => {
+  return async (valores) => {
     const { email, senha } = valores;
     const response = await jsonServer.get("users");
     console.log(response.data);
@@ -48,7 +41,7 @@ const getChurras = (dispatch) => {
     dispatch({ type: "get_churras", payload: response.data });
   };
 };
-const addChurras = (dispatch) => {
+const addChurras = () => {
   return async (churras, callback) => {
     const {
       nome,
@@ -60,6 +53,10 @@ const addChurras = (dispatch) => {
       listaConvidado,
     } = churras;
 
+    const total = listaConvidado.reduce(
+      (total, currentValue) => (total = total + currentValue.preco),
+      0
+    );
     await jsonServer.post("/churrascos", {
       nome,
       data,
@@ -68,6 +65,7 @@ const addChurras = (dispatch) => {
       bebidaPreco,
       obs,
       listaConvidado,
+      total,
     });
     alert("Cadastro realizado com sucesso");
     if (callback) {
@@ -75,9 +73,14 @@ const addChurras = (dispatch) => {
     }
   };
 };
-
+const editChurras = () => {
+  return async (churras) => {
+    console.log("churras", churras);
+    await jsonServer.put(`/churrascos/${churras.id}`, churras);
+  };
+};
 export const { Context, Provider } = createDataContext(
   churrasReducer,
-  { addChurras, getChurras, signIn },
+  { addChurras, editChurras, getChurras, signIn },
   { churras: [] }
 );

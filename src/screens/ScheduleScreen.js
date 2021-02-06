@@ -5,23 +5,11 @@ import { Card } from "../components/Card";
 import { Wrapper } from "../components/Wrapper";
 import { Context as ChurrasContext } from "../context/ChurrasContext";
 
-const Dashboard = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  flex-wrap: wrap;
-  justify-content: space-around;
-`;
-const CardDiv = styled.div`
-  margin-bottom: 67px;
-  margin-top: -32px;
-  border-radius: 2px;
-`;
 export const ScheduleScreen = () => {
   const { state, getChurras } = useContext(ChurrasContext);
   useEffect(() => {
     getChurras();
-  }, []);
+  }, [getChurras, state]);
 
   const churrascos = state.churras;
   return (
@@ -49,3 +37,15 @@ export const ScheduleScreen = () => {
     </Wrapper>
   );
 };
+const Dashboard = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: space-around;
+`;
+const CardDiv = styled.div`
+  margin-bottom: 67px;
+  margin-top: -32px;
+  border-radius: 2px;
+`;

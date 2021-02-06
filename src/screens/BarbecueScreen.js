@@ -8,50 +8,6 @@ import { Context as ChurrasContext } from "../context/ChurrasContext";
 import { Link, useHistory } from "react-router-dom";
 import { FiTrash2 } from "react-icons/fi";
 import { IconContext } from "react-icons";
-const Form = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  flex-wrap: wrap;
-  justify-content: space-around;
-`;
-const Label = styled.p`
-  font-style: normal;
-  font-weight: bold;
-  font-size: 21px;
-  line-height: 25px;
-  font-weight: 700;
-  color: ${(props) => props.theme.colors.text};
-`;
-
-const FieldsDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 5px;
-  margin: 10px;
-  flex: 1;
-`;
-
-const CheckBox = styled.input`
-  transform: scale(1.5);
-  color: ${(props) => props.theme.colors.primary};
-`;
-
-const CheckBoxDiv = styled.div`
-  margin-top: 10px;
-`;
-
-const CheckBoxLabel = styled.span`
-  font-size: 16px;
-  font-weight: bold;
-`;
-const Lista = styled.ul``;
-
-const ListaItem = styled.li`
-  line-height: 25px;
-  font-weight: bold;
-  font-size: 21px;
-`;
 
 export const BarbecueScreen = () => {
   let history = useHistory();
@@ -64,9 +20,6 @@ export const BarbecueScreen = () => {
   });
 
   const [bebida, setBebida] = useState(false);
-
-  console.log(values);
-  console.log(bebida);
   const { addChurras } = useContext(ChurrasContext);
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -147,6 +100,7 @@ export const BarbecueScreen = () => {
                   nome: values.convidado,
                   preco: 0,
                   bebida,
+                  id: Math.floor((1 + Math.random()) * 0x10000),
                 });
               }
             }}
@@ -169,6 +123,8 @@ export const BarbecueScreen = () => {
                     nome: values.convidado,
                     preco: 0,
                     bebida,
+                    pagamento: false,
+                    id: Math.floor((1 + Math.random()) * 0x10000),
                   })
                 }
               >
@@ -218,3 +174,47 @@ export const BarbecueScreen = () => {
     </Wrapper>
   );
 };
+const Form = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: space-around;
+`;
+const Label = styled.p`
+  font-style: normal;
+  font-weight: bold;
+  font-size: 21px;
+  line-height: 25px;
+  font-weight: 700;
+  color: ${(props) => props.theme.colors.text};
+`;
+
+const FieldsDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin: 10px;
+  flex: 1;
+`;
+
+const CheckBox = styled.input`
+  transform: scale(1.5);
+  color: ${(props) => props.theme.colors.primary};
+`;
+
+const CheckBoxDiv = styled.div`
+  margin-top: 10px;
+`;
+
+const CheckBoxLabel = styled.span`
+  font-size: 16px;
+  font-weight: bold;
+`;
+const Lista = styled.ul``;
+
+const ListaItem = styled.li`
+  line-height: 25px;
+  font-weight: bold;
+  font-size: 21px;
+`;
